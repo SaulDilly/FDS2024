@@ -4,9 +4,9 @@ public class Carro {
     private Motor motor;
     private TanqueCombustivel tanque;
 
-    public Carro(String modelo, TipoCombustivel tipoCombustivel, int consumoMotor, int capacidadeTanque) {
+    public Carro(String modelo, TipoCombustivel tipoCombustivel, int consumoCombustivel1, int consumoCombustivel2, int capacidadeTanque) {
         this.modelo = modelo;
-        motor = new Motor(tipoCombustivel, consumoMotor);
+        motor = new Motor(tipoCombustivel, consumoCombustivel1, consumoCombustivel2);
         tanque = new TanqueCombustivel(tipoCombustivel, capacidadeTanque);
     }
 
@@ -17,7 +17,7 @@ public class Carro {
     public int getCombustivelDisponivel() {
         return tanque.getCombustivelDisponivel();
     }
-
+    
     // Retorna a quantidade efetivamente abastecida
     public int abastece(TipoCombustivel tipoCombustivel, int quantidade) {
         int capacidadeLivre = tanque.getCapacidade() - tanque.getCombustivelDisponivel();
@@ -32,11 +32,11 @@ public class Carro {
 
     // Retorna a distancia que consegue viajar com o combustivel remanescente
     public int verificaSePodeViajar(int distancia) {
-        int combustivelNecessario = motor.combustivelNecessario(distancia);
+        int combustivelNecessario = motor.combustivelNecessario(distancia, tanque.getUltimoCombustivel());
         if (tanque.getCombustivelDisponivel() >= combustivelNecessario) {
             return distancia;
         } else {
-            return tanque.getCombustivelDisponivel() * motor.getConsumo();
+            return tanque.getCombustivelDisponivel() * motor.getConsumo(tanque.getUltimoCombustivel());
         }
     }
 
@@ -44,7 +44,7 @@ public class Carro {
     public boolean viaja(int distancia) {
         if (verificaSePodeViajar(distancia) >= distancia) {
             motor.percorre(distancia);
-            tanque.gasta(motor.combustivelNecessario(distancia));
+            tanque.gasta(motor.combustivelNecessario(distancia, tanque.getUltimoCombustivel()));
             return true;
         }
         return false;

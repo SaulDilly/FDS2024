@@ -1,16 +1,18 @@
 public class Motor {
-
+    
     private TipoCombustivel tipoMotor;
-    private int consumo; // em quilometros por unidade. Ex: Km/Lt
+    private int consumoCombustivel1;
+    private int consumoCombustivel2;
     private int quilometragem;
 
-    public Motor(TipoCombustivel tipoMotor, int consumo) {
+    public Motor(TipoCombustivel tipoMotor, int consumoCombustivel1, int consumoCombustivel2) {
         this.tipoMotor = tipoMotor;
-        this.consumo = consumo;
+        this.consumoCombustivel1 = consumoCombustivel1;
+        this.consumoCombustivel2 = consumoCombustivel2;
     }
 
-    public int getConsumo() {
-        return this.consumo;
+    public int getConsumo(TipoCombustivel tipoCombustivel) {
+        return tipoCombustivel == TipoCombustivel.ALCOOL ? this.consumoCombustivel2 : this.consumoCombustivel1;
     }
 
     public TipoCombustivel getTipoMotor(){
@@ -21,8 +23,8 @@ public class Motor {
         return this.quilometragem;
     }
 
-    public int combustivelNecessario(int distancia) {
-        return distancia / consumo;
+    public int combustivelNecessario(int distancia, TipoCombustivel tipoCombustivel) {
+        return distancia / getConsumo(tipoCombustivel);
     }
 
     public void percorre(int distancia) {
@@ -31,6 +33,6 @@ public class Motor {
 
     @Override
     public String toString() {
-        return "Motor [consumo=" + consumo + ", quilometragem=" + quilometragem + ", tipoMotor=" + tipoMotor + "]";
+        return "Motor [consumoCombustivel1=" + consumoCombustivel1 + ", consumoCombustivel2=" + consumoCombustivel2 + ", quilometragem=" + quilometragem + ", tipoMotor=" + tipoMotor + "]";
     }
 }
