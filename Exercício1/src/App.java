@@ -2,7 +2,7 @@ public class App {
 
     public static void exibeProgressoCarro(Carro c, TipoCombustivel tc, String s, int abastecimento) {
         System.out.println("\n\n----------------");
-        System.out.println("\nAbastencendo carro "+ s +" com gasolina");
+        System.out.println("\nAbastencendo carro "+ s +" com "+tc.name().toLowerCase());
         c.abastece(tc, abastecimento);
         System.out.println(c);
         System.out.println("\nViajando com o carro "+s);
@@ -22,10 +22,11 @@ public class App {
         System.out.println(basico);
         System.out.println(esportivo);
         System.out.println(utilitario);
+        System.out.println(suv);
 
-        exibeProgressoCarro(basico, TipoCombustivel.GASOLINA, "basico", 55).
-        exibeProgressoCarro(esportivo, TipoCombustivel.GASOLINA, "esportivo", 45).
-        exibeProgressoCarro(utilitario, TipoCombustivel.DIESEL, "utilitario", 70).
-        exibeProgressoCarro(suv, TipoCombustivel.GASOLINA, "suv", 55).
+        exibeProgressoCarro(basico, TipoCombustivel.GASOLINA, "basico", 55);
+        exibeProgressoCarro(esportivo, TipoCombustivel.GASOLINA, "esportivo", 45);
+        exibeProgressoCarro(utilitario, TipoCombustivel.DIESEL, "utilitario", 70);
+        exibeProgressoCarro(suv, TipoCombustivel.GASOLINA, "suv", 55);
     }
 }
