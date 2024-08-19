@@ -4,9 +4,9 @@ public class Carro {
     private Motor motor;
     private TanqueCombustivel tanque;
 
-    public Carro(String modelo, TipoCombustivel tipoCombustivel, int consumoCombustivel1, int consumoCombustivel2, int capacidadeTanque) {
+    public Carro(String modelo, TipoCombustivel tipoCombustivel, Motor motor, int capacidadeTanque) {
         this.modelo = modelo;
-        motor = new Motor(tipoCombustivel, consumoCombustivel1, consumoCombustivel2);
+        this.motor = motor;
         tanque = new TanqueCombustivel(tipoCombustivel, capacidadeTanque);
     }
 
@@ -17,7 +17,7 @@ public class Carro {
     public int getCombustivelDisponivel() {
         return tanque.getCombustivelDisponivel();
     }
-    
+
     // Retorna a quantidade efetivamente abastecida
     public int abastece(TipoCombustivel tipoCombustivel, int quantidade) {
         int capacidadeLivre = tanque.getCapacidade() - tanque.getCombustivelDisponivel();
